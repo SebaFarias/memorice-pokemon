@@ -1,0 +1,25 @@
+body{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.board{
+  display: grid;
+  row-gap: 10px;
+  column-gap: 10px;
+  width: 90vw;
+  height: 90vh;
+}
+.card{
+  background: gray;
+  padding: 10px 30px;
+  border-radius: 10px;
+}
+.pokemon-img{
+  width: 100px;
+  height: auto;
+}
