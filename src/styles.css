@@ -2,24 +2,35 @@ body{
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+}
+#root{
   display: flex;
+  width: 100%;
+  height: 100%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(116.82deg, #2571F8 0%, #68E2F8 99.99%, #FFFFFF 100%);
 }
 .board{
   display: grid;
   row-gap: 10px;
   column-gap: 10px;
-  width: 90vw;
-  height: 90vh;
+  padding: 2rem 1rem;
 }
 .card{
-  background: gray;
-  padding: 10px 30px;
+  background: radial-gradient(50% 50% at 50% 50%, #020A25 0%, #1E61B0 100%);
+  align-self: center;
+  justify-self: center;
+  display: flex;
+  min-width: 50px;
   border-radius: 10px;
+  border: 5px solid #1D379C;
+  overflow: hidden;
 }
 .pokemon-img{
-  width: 100px;
+  margin: auto;
+  width: 100%;
   height: auto;
 }

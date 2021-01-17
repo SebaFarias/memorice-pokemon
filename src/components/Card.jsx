@@ -4,13 +4,15 @@ import imgController from '../../data/controllers/img'
 const Card = ({id}) => {
   const vertical = window.innerHeight > window.innerWidth
   const cardStyle = {
-    width: 100,
-    height: 250,
+    width: 50,
+    minWidth: '10vw',
+    height: 50,
+    minHeight: '10vh',
   }
   
   return (
     <section className='card' style={cardStyle}>
-      <h3>{imgController.getName(id)}</h3>
+      {/*<h3>{imgController.getName(id)}</h3>*/}
       <img className='pokemon-img'src={imgController.getImg(id)}/>
     </section>
   )
