@@ -37,10 +37,10 @@ module.exports = {
   plugins:[
     new CleanWebpackPlugin(), new HtmlWebpackPlugin({
       template:'./public/index.html',
-      //favicon: './public/assets/icon.svg',
+      favicon: './public/icon.svg',
   })],
   devServer: {
-    port: 8080,
+    port: 8000,
     contentBase: path.resolve(__dirname,'dist'),
     hot: true,
   }

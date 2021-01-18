@@ -15,14 +15,14 @@
     <ellipse cx="36.5728" cy="10.0955" rx="4.63274" ry="6.78178" transform="rotate(-47.9258 36.5728 10.0955)" fill="white"/>
     <circle cx="24" cy="24" r="23.5" stroke="black"/>
     <circle cx="14.5" cy="18.5" r="7.5" fill="black"/>
-    <circle cx="14.5" cy="18.5" r="6.13636" fill="#94CEE4"/>
-    <circle cx="15.1818" cy="19.1818" r="4.09091" fill="#587A86"/>
-    <circle cx="13.8182" cy="17.8182" r="4.09091" fill="#B1D5E8"/>
+    <circle cx="14.5" cy="18.5" r="6.13636" fill="#C4C4C4"/>
+    <circle cx="15.1819" cy="19.1818" r="4.09091" fill="#848885"/>
+    <circle cx="13.8182" cy="17.8182" r="4.09091" fill="#C2D1D6"/>
   </g>
   <defs>
     <linearGradient id="paint0_linear" x1="48" y1="24" x2="0" y2="0" gradientUnits="userSpaceOnUse">
-    <stop stop-color="#DA2000"/>
-    <stop offset="1" stop-color="#EA4F35"/>
+      <stop stop-color="#DA2000"/>
+      <stop offset="1" stop-color="#EA4F35"/>
     </linearGradient>
     <linearGradient id="paint1_linear" x1="-13" y1="20" x2="52" y2="39" gradientUnits="userSpaceOnUse">
       <stop stop-color="#B4B7B5"/>

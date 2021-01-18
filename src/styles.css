@@ -2,6 +2,7 @@ body{
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  background: linear-gradient(116.82deg, #2571F8 0%, #68E2F8 100%);
 }
 #root{
   display: flex;
@@ -11,16 +12,22 @@ body{
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: linear-gradient(116.82deg, #2571F8 0%, #68E2F8 99.99%, #FFFFFF 100%);
+  background: linear-gradient(116.82deg, #2571F8 0%, #68E2F8 100%);
+}
+.header{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .board{
   display: grid;
   row-gap: 10px;
   column-gap: 10px;
-  padding: 2rem 1rem;
+  padding: 2rem 0;
 }
 .card{
-  background: radial-gradient(50% 50% at 50% 50%, #020A25 0%, #1E61B0 100%);
+  background: radial-gradient(50% 50% at 50% 50%, #68E2F8 0%, #1E61B0 100%);
   align-self: center;
   justify-self: center;
   display: flex;
@@ -31,6 +38,4 @@ body{
 }
 .pokemon-img{
   margin: auto;
-  width: 100%;
-  height: auto;
 }

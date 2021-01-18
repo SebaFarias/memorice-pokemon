@@ -3,9 +3,9 @@ const pokemonController = {
     const newPokemonsArray = []
     const newPokemonsDictionary = {}
     
-    for(let i = 0; i < columns; i++){
+    for(let i = 0; i < rows; i++){
       newPokemonsArray[i]= []
-        for(let j = 0; j < rows; j++){
+        for(let j = 0; j < columns; j++){
           const newId = randomId(newPokemonsDictionary)
           newPokemonsArray[i][j] = newId
           newPokemonsDictionary[newId] = true

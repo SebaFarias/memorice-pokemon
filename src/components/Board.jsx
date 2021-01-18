@@ -1,16 +1,18 @@
-import React, {useState} from 'react'
+import React, { useState, useContext } from 'react'
+import {GlobalContext} from './GlobalContext'
 import pokemonController from '../../data/controllers/pokemon'
 import Card from './Card'
 
-const Board = ( { rows, columns } ) => {
+const Board = () => {
   
-  const [ pokemons, setPokemons ] = useState(pokemonController.getNewArray(rows,columns))
+  const [ global, controller ] = useContext(GlobalContext)
+  const [ pokemons, setPokemons ] = useState(pokemonController.getNewArray(global.rows,global.columns))
   const boardStyle = {
-    gridTemplate: `repeat(${rows},1fr) / repeat(${columns},1fr)`
+    gridTemplate: `repeat(${global.rows},1fr) / repeat(${global.columns},1fr)`
   }
   return ( 
     <main className='board' style = {boardStyle}>
-      {pokemons.map( ( row, i ) => {
+      {global.data.map( ( row, i ) => {
         return row.map( ( pokemon, j ) => {
           return <Card id={pokemon} key={`card-${i}-${j}`}/>
         })

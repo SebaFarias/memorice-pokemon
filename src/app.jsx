@@ -1,13 +1,15 @@
 import React from 'react'
+import { GlobalStateProvider } from './components/GlobalContext'
 import Board from './components/Board'
+import Header from './components/Header'
 import './styles.css'
 
 const App = () => {
   return (
-    <>
-      <h1 style={{textAlign: 'center',width:'100%'}}> Check this pokes out!</h1>
-      <Board rows='4' columns='4'/>
-    </>
+    <GlobalStateProvider>
+      <Header/>
+      <Board/>
+    </GlobalStateProvider>
   )
 }
 
