@@ -2,9 +2,8 @@ const Highscore = require('../models/highscore')
 
 const highscoreMethods = {
   getHighscores: ( req, res ) => {
-    console.log('we got here')
     res.json({
-      msg: 'almost working',
+      message: 'all working',
     })
   },
 }

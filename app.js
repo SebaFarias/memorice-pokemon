@@ -4,11 +4,12 @@ const helmet = require('helmet')
 const cors = require('cors')
 const notFound = require('./middlewares/notFound')
 const errorHandler = require('./middlewares/errorHandler')
-const highscoreRoutes = require('./routes/highscore')
+const highscoreRoutes = require('./routes/highscore.routes')
 
 const app = express()
 
 //middlewares
+app.use(express.urlencoded({extended: true}))
 app.use(morgan('common'))
 app.use(helmet())
 app.use(cors({
@@ -17,7 +18,7 @@ app.use(cors({
 app.use(express.json())
 
 //routes
-app.get('/hallOfFame' , highscoreRoutes)
+app.use('/highscores' , highscoreRoutes)
 app.get( '/', ( request, response ) => {
   response.json({
     message: "Binvenido al memorice Pokemon"
