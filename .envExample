@@ -1,0 +1,6 @@
+NODE_ENV = development
+CORS_ORIGIN = http://localhost/3000
+DB_USER = YourUserName
+DB_PASSWORD = YourFancyPassword
+DB_CLUSTER = YourClusterName
+DB_NAME = YourDataBaseName
