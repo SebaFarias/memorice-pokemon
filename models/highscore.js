@@ -26,4 +26,4 @@ const highscoreSchema = mongoose.Schema({
   versionKey: false,
 })
 
-mongoose.model( 'Highscore' , highscoreSchema )
+module.exports = mongoose.model( 'Highscore' , highscoreSchema )
