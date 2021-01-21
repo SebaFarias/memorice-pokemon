@@ -1,7 +1,8 @@
 import React from 'react'
 import { GlobalStateProvider } from './components/GlobalContext'
-import Board from './components/Board'
 import Header from './components/Header'
+import Board from './components/Board'
+import Footer from './components/Footer'
 import './styles.css'
 
 const App = () => {
@@ -9,6 +10,7 @@ const App = () => {
     <GlobalStateProvider>
       <Header/>
       <Board/>
+      <Footer/>
     </GlobalStateProvider>
   )
 }

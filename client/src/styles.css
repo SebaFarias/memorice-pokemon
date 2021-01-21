@@ -1,8 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
+
+:root{
+  --gradient:linear-gradient(116.82deg, #2571F8 0%, #68E2F8 100%);
+}
+
 body{
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  background: linear-gradient(116.82deg, #2571F8 0%, #68E2F8 100%);
+  background: var(--gradient);
+  font-family: 'Inter' , 'Serif';
 }
 #root{
   display: flex;
@@ -12,7 +19,7 @@ body{
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: linear-gradient(116.82deg, #2571F8 0%, #68E2F8 100%);
+  background: var(--gradient);
 }
 .header{
   display: flex;
@@ -25,17 +32,39 @@ body{
   row-gap: 10px;
   column-gap: 10px;
   padding: 2rem 0;
+  width: 95vw;
+  height: 80vh;
+  justify-content: center;
 }
 .card{
   background: radial-gradient(50% 50% at 50% 50%, #68E2F8 0%, #1E61B0 100%);
   align-self: center;
   justify-self: center;
+  width: 90%;
+  height: 90%;
   display: flex;
-  min-width: 50px;
   border-radius: 10px;
   border: 5px solid #1D379C;
   overflow: hidden;
 }
 .pokemon-img{
   margin: auto;
+}
+.attribution { 
+  padding: 1rem;
+  flex-grow: 1;
+  align-self: stretch;
+  border-radius: 1.5rem 1.5rem 0 0;
+  font-size: 14px;
+  font-weight: bold; 
+  text-align: center;
+  color: white;
+  background: #1F212D;
+}
+.attribution a { 
+  text-decoration: none;
+  background: var(--gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

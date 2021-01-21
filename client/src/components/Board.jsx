@@ -1,24 +1,59 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import {GlobalContext} from './GlobalContext'
-import pokemonController from '../../data/controllers/pokemon'
 import Card from './Card'
+
+const GRID_GAP = 10
 
 const Board = () => {
   
   const [ global, controller ] = useContext(GlobalContext)
-  const [ pokemons, setPokemons ] = useState(pokemonController.getNewArray(global.rows,global.columns))
-  const boardStyle = {
-    gridTemplate: `repeat(${global.rows},1fr) / repeat(${global.columns},1fr)`
-  }
-  return ( 
-    <main className='board' style = {boardStyle}>
+  const [ cardSize, setCardSize ] = useState(
+    [calculateCardSize(global.rows,GRID_GAP,'y'),calculateCardSize(global.columns,GRID_GAP,'x')]
+    )
+  const [boardStyle,setBoardStyle] = useState({
+    gridTemplateRows: `repeat(${global.rows},${90/global.rows}%)`,
+    gridTemplateColumns: `repeat(${global.columns},${85/global.columns}%)`,
+  })  
+  useEffect( () => {
+    const handleResize = () => {
+      setCardSize(
+        [calculateCardSize(global.rows,GRID_GAP,'y'),calculateCardSize(global.columns,GRID_GAP,'x')]
+        )
+    }
+    const recalculateCardSize = () => {
+      setBoardStyle({
+        gridTemplateRows: `repeat(${global.rows},${90/global.rows}%)`,
+        gridTemplateColumns: `repeat(${global.columns},${85/global.columns}%)`,
+      })  
+    }
+    window.addEventListener( 'resize', handleResize)
+    handleResize()
+    recalculateCardSize()
+    return () => window.removeEventListener( 'resize', handleResize)
+  } , [global.rows,global.columns]  )
+
+  return (
+    <main id='board' className='board' style = {boardStyle}>
       {global.data.map( ( row, i ) => {
         return row.map( ( pokemon, j ) => {
-          return <Card id={pokemon} key={`card-${i}-${j}`}/>
+          return (
+          <Card 
+            key={`card-${i}-${j}`} 
+            pokemon={pokemon.id} 
+            reverse={pokemon.state} 
+            position={[i,j]}
+            vertical={cardSize[0] > cardSize[1]}
+          />)
         })
       })}
     </main>
   )
+}
+
+const calculateCardSize = ( quantity , gap , axis ) => {
+  const space = axis === 'x' ? window.innerWidth : window.innerHeight
+  console.log(space)
+  return (0.8*space - (gap * (quantity-1))) / quantity
 }
 
 export default Board

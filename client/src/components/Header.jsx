@@ -10,7 +10,7 @@ const Header = () => {
         <button onClick={controller.substractRow}> - </button>
         {global.rows} ROWS
         <button onClick={controller.addRow}> + </button>
-        <button onClick={controller.initializeGame}>
+        <button onClick={controller.getNewBoard}>
         Random
         </button>
         <button onClick={controller.substractColumn}> - </button>

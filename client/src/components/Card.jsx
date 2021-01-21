@@ -1,45 +1,59 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
 import imgController from '../../data/controllers/img'
+import {GlobalContext} from './GlobalContext'
+import pokeballImg from '../../public/icon.svg'
 
-const Card = ({id}) => {
-  const [ windowState, setWindowState] = useState({
-    vertical: window.innerHeight > window.innerWidth,
-    cardStyle: {
-      width: 50,
-      height: 50,
-      minWidth: '10vw',
-      minHeight: '10vh',
-    },
+const FLIP_TIME = 500
+
+const Card = ({ pokemon, reverse, position, vertical }) => {
+  const [ global, controller ] = useContext(GlobalContext)
+  const [ reversed, setReversed ] = useState( reverse )
+  const [ cardStyle, setCardStyle ] = useState({
+    cursor: `${reversed === 'solved'? 'not-allowed':'pointer'}`,
+    transform: `translate(${needCorrection(global,position)?50:0}%,0%)`,
+    transition: `transform ${FLIP_TIME}ms`
   })
-
-  useEffect( () => {
-    const handleResize = () => {
-      setWindowState({
-        vertical: window.innerHeight > window.innerWidth,
-        cardStyle: {
-          width: 50,
-          height: 50,
-          minWidth: '10vw',
-          minHeight: '10vh',
-        },
+  const flip = () => {
+    controller.toggleBlocked()
+  setCardStyle( prevState => {
+    return({
+        ...prevState,
+        transform: `translate(${needCorrection(global,position)?50:0}%,0%) rotate3d(0,1,0,90deg)`,
       })
-    }
-    document.addEventListener('resize', handleResize)
-    handleResize()
-    return(
-      document.removeEventListener('resize', handleResize)
-    )
-  },[windowState])
+    })
+    setTimeout(()=>{
+      setReversed( prevState => {
+        return(controller.getNewState(prevState))
+      })
+      setTimeout(()=>{
+        controller.toggleBlocked()
+        setCardStyle( prevState => {
+          return({
+            ...prevState,
+            transform: `translate(${needCorrection(global,position)?50:0}%,0%)`,
+          })
+        })
+      },FLIP_TIME)
+    },FLIP_TIME)
+  }
+  const handleClick = () => {
+    flip()
+    controller.flipCard(position)
+  }
   
   return (
-    <section className='card' style={windowState.cardStyle}>
-      {/*<h3>{imgController.getName(id)}</h3>*/}
+    <section 
+      className='card' 
+      style={cardStyle}
+      onClick={handleClick}
+      id={`card${position[0]}-${position[1]}`}  
+    >
       <img 
         className='pokemon-img'
-        src={imgController.getImg(id)}
+        src={ reversed === 'hidden'? pokeballImg : imgController.getImg(pokemon) }
         style={{
-          width:  `${ windowState.vertical ? '100%': 'auto' }`,
-          height: `${ windowState.vertical ? 'auto': '100%' }`,
+          width:  `${ vertical ? '100%': 'auto' }`,
+          height: `${ vertical ? 'auto': '100%' }`,
         }}
       />
     </section>
@@ -48,6 +62,6 @@ const Card = ({id}) => {
 
 export default Card
 
-const rotate = {
-  transform: 'rotate3d(0,1,0,90deg)',
+const needCorrection = ({rows,columns},position) => {
+  return (rows*columns)%2 != 0 && rows == position[0]
 }

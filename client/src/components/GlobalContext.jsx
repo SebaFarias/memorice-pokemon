@@ -1,4 +1,5 @@
 import React, {useState , createContext} from 'react'
+const PokeMatrix = require('../model/PokeMatrix')
 
 export const GlobalContext = createContext()
 
@@ -7,10 +8,10 @@ const MAX_COLUMNS = 10
 
 export const GlobalStateProvider = (props) => {
   const [ global, setGlobal] = useState({
-    data: [],
-    pairs: [],
-    rows: 3,
-    columns: 7,
+    data: new PokeMatrix( 5 , 6 ).getPokeMatrix(),
+    rows: 5,
+    columns: 6,
+    blocked: false,
     started: false,
     finished: false,
     startingTime: null,
@@ -26,11 +27,21 @@ export const GlobalStateProvider = (props) => {
         })
       })
     },
+    toggleBlocked: () => {
+      setGlobal( prevState => {
+        document.getElementById('board').style.pointerEvents = prevState? 'auto' : 'none'
+        return({
+          ...prevState,
+          blocked: !prevState.blocked,
+        })
+      })
+    },
     setRows: newValue => {
       setGlobal( prevState => {
         return({
           ...prevState,
           rows: newValue,
+          data: new PokeMatrix( newValue, prevState.columns ).getPokeMatrix(),
       })
       })
     },
@@ -41,6 +52,7 @@ export const GlobalStateProvider = (props) => {
         return({
           ...prevState,
           rows: current + 1,
+          data: new PokeMatrix( current+1, prevState.columns ).getPokeMatrix(),
         })
       })
     },
@@ -51,6 +63,7 @@ export const GlobalStateProvider = (props) => {
         return({
           ...prevState,
           rows: current - 1,
+          data: new PokeMatrix( current-1, prevState.columns ).getPokeMatrix(),
         })
       })
     },
@@ -59,6 +72,7 @@ export const GlobalStateProvider = (props) => {
         return({
           ...prevState,
           columns: newValue,
+          data: new PokeMatrix( prevState.rows, newValue ).getPokeMatrix(),
       })
       })
     },
@@ -69,6 +83,7 @@ export const GlobalStateProvider = (props) => {
         return({
           ...prevState,
           columns: current + 1,
+          data: new PokeMatrix( prevState.rows, current + 1 ).getPokeMatrix(),
         })
       })
     },
@@ -79,75 +94,28 @@ export const GlobalStateProvider = (props) => {
         return({
           ...prevState,
           columns: current - 1,
+          data: new PokeMatrix( prevState.rows, current - 1 ).getPokeMatrix(),
         })
       })
     },
-    initializeGame: () => {
-      generatePairs()
+    getNewBoard: () => {
       setGlobal( prevState => {
-        const pokemons = prevState.pairs
-        const data = []
-          for( let i = 0; i < prevState.rows; i++ ){
-            data[i] = []
-          }
-        let positions = getPositions(prevState.rows,prevState.columns)
-        pokemons.map( pokemon => {
-          const [ [row1,col1], newPositions1] =getRandomPosition(positions)
-          data[row1][col1] = pokemon
-          positions = newPositions1
-          const [ [row2,col2], newPositions2] = getRandomPosition(positions)
-          data[row2][col2] = pokemon
-          positions = newPositions2
-        })
         return({
           ...prevState,
-          data: data
+          data: new PokeMatrix( prevState.rows, prevState.columns ).getPokeMatrix(),
         })
       })
-    }
+    },
+    flipCard: indexes => {
+      console.log(indexes)
+    },
+    getNewState: prevCardState => {
+      if( prevCardState === 'hidden' ) return 'shown'
+      if( prevCardState === 'shown' ) return 'hidden'
+      return prevCardState
+    },
   }
-  const getRandomPosition = posiblePositions => {
-    const randomIndex = Math.floor(Math.random() * posiblePositions.length)
-    return [posiblePositions[randomIndex],posiblePositions.filter( ( pos, index) => index != randomIndex)]
-  }
-  const getPositions = ( rows, columns ) => {
-    const positions = []
-    const quantity = rows * columns - (rows * columns % 2 == 0 ? 0 : 1)
-    let rowIndex = 0
-    let columnIndex = 0
-    for(let i = 0; i < quantity; i++){
-      positions[i]= [ rowIndex, columnIndex ]
-      columnIndex++
-      if(columnIndex >= columns){
-        rowIndex++
-        columnIndex = 0
-      }    
-    }
-    return positions
-  }
-  const generatePairs = () => {
-    setGlobal( prevState => {
-      const newPokemonsArray = []
-      const pokemonsDictionary = {}
-      const quantity = Math.floor( prevState.columns * prevState.rows / 2 )
-
-      for(let i = 0; i < quantity; i++){
-        const newId = randomId(pokemonsDictionary)
-        newPokemonsArray[i] = newId
-        pokemonsDictionary[newId] = true
-      }
-
-      return {
-        ...prevState,
-        pairs: newPokemonsArray,
-      }
-    })
-  }
-  const randomId = dictionary => {
-    const newId = Math.floor((Math.random() * 649) + 1);
-    if(dictionary[newId]) return randomId(dictionary)
-    return newId
-  }
+  
   return (
     <GlobalContext.Provider value={ [ global, controller ] }>
       {props.children}

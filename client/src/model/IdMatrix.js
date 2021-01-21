@@ -49,8 +49,8 @@ class IdMatrix {
     }
     this.idMatrix = newMatrix
   }
-  generateIdMatrix(){
-    this.reset()
+  generateIdMatrix( rows = 0, columns = 0){
+    this.reset(rows, columns)
     this.idList.getList().map( id => {
       const [ row1, column1 ] = this.getRandomPosition()
       this.idMatrix[row1][column1] = id
