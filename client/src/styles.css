@@ -50,16 +50,21 @@ body{
 .pokemon-img{
   margin: auto;
 }
-.attribution { 
+.bar{
   padding: 1rem;
   flex-grow: 1;
   align-self: stretch;
-  border-radius: 1.5rem 1.5rem 0 0;
   font-size: 14px;
   font-weight: bold; 
   text-align: center;
   color: white;
-  background: #1F212D;
+  background: linear-gradient(0deg,#1F212D 0%,#2a2d3c 50%,#1F212D 100%);
+}
+.top{
+  border-radius: 0 0 1.5rem 1.5rem;
+}
+.attribution { 
+  border-radius: 1.5rem 1.5rem 0 0;
 }
 .attribution a { 
   text-decoration: none;

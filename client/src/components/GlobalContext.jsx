@@ -1,10 +1,11 @@
 import React, {useState , createContext} from 'react'
-const PokeMatrix = require('../model/PokeMatrix')
+import Timer from '../model/Timer'
+import PokeMatrix from'../model/PokeMatrix'
 
 export const GlobalContext = createContext()
 
-const MAX_ROWS = 10
-const MAX_COLUMNS = 10
+const MAX_ROWS = 9
+const MAX_COLUMNS = 9
 
 export const GlobalStateProvider = (props) => {
   const [ global, setGlobal] = useState({
@@ -12,10 +13,7 @@ export const GlobalStateProvider = (props) => {
     rows: 5,
     columns: 6,
     blocked: false,
-    started: false,
-    finished: false,
-    startingTime: null,
-    finishingTime:null,
+    timer: new Timer(),
     errors: 0,
   })
   const controller = {

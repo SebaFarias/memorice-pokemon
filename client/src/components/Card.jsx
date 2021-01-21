@@ -3,7 +3,7 @@ import imgController from '../../data/controllers/img'
 import {GlobalContext} from './GlobalContext'
 import pokeballImg from '../../public/icon.svg'
 
-const FLIP_TIME = 500
+const FLIP_TIME = 300
 
 const Card = ({ pokemon, reverse, position, vertical }) => {
   const [ global, controller ] = useContext(GlobalContext)
@@ -25,7 +25,6 @@ const Card = ({ pokemon, reverse, position, vertical }) => {
       setReversed( prevState => {
         return(controller.getNewState(prevState))
       })
-      setTimeout(()=>{
         controller.toggleBlocked()
         setCardStyle( prevState => {
           return({
@@ -33,7 +32,6 @@ const Card = ({ pokemon, reverse, position, vertical }) => {
             transform: `translate(${needCorrection(global,position)?50:0}%,0%)`,
           })
         })
-      },FLIP_TIME)
     },FLIP_TIME)
   }
   const handleClick = () => {
