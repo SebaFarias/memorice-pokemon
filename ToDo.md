@@ -7,8 +7,8 @@
 
 
   ## Jueves 21/01/21
-     [ ] Cronómetro
-     [ ] Contador de Errores
+     [X] Cronómetro
+     [X] Contador de Errores
      [ ] Modal de Prof, Oak
          - [ ] Range columnas
          - [ ] Range filas

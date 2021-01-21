@@ -13,6 +13,7 @@ export const GlobalStateProvider = (props) => {
     rows: 5,
     columns: 6,
     blocked: false,
+    started: false,
     menu:1,
     showMenu:true,
     timer: new Timer(),
