@@ -40,7 +40,7 @@ const Board = () => {
           <Card 
             key={`card-${i}-${j}`} 
             pokemon={pokemon.id} 
-            reverse={pokemon.state} 
+            status={pokemon.state} 
             position={[i,j]}
             vertical={cardSize[0] > cardSize[1]}
           />)
@@ -52,7 +52,6 @@ const Board = () => {
 
 const calculateCardSize = ( quantity , gap , axis ) => {
   const space = axis === 'x' ? window.innerWidth : window.innerHeight
-  console.log(space)
   return (0.8*space - (gap * (quantity-1))) / quantity
 }
 

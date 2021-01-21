@@ -13,15 +13,33 @@ export const GlobalStateProvider = (props) => {
     rows: 5,
     columns: 6,
     blocked: false,
+    menu:1,
+    showMenu:true,
     timer: new Timer(),
     errors: 0,
   })
   const controller = {
+    toggleMenu: () => {
+      setGlobal( prevState => {
+        return ({
+          ...prevState,
+          showMenu: !prevState.showMenu,
+        })
+      })
+    },
     addError: () => {
       setGlobal( prevState => {
         return ({
           ...prevState,
-          errors: prevState.errors + 1
+          errors: prevState.errors + 1,
+        })
+      })
+    },
+    restartErrors: () => {
+      setGlobal( prevState => {
+        return ({
+          ...prevState,
+          errors: 0,
         })
       })
     },

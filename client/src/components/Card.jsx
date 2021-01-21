@@ -5,9 +5,9 @@ import pokeballImg from '../../public/icon.svg'
 
 const FLIP_TIME = 300
 
-const Card = ({ pokemon, reverse, position, vertical }) => {
+const Card = ({ pokemon, status, position, vertical }) => {
   const [ global, controller ] = useContext(GlobalContext)
-  const [ reversed, setReversed ] = useState( reverse )
+  const [ reversed, setReversed ] = useState( status )
   const [ cardStyle, setCardStyle ] = useState({
     cursor: `${reversed === 'solved'? 'not-allowed':'pointer'}`,
     transform: `translate(${needCorrection(global,position)?50:0}%,0%)`,
@@ -35,6 +35,7 @@ const Card = ({ pokemon, reverse, position, vertical }) => {
     },FLIP_TIME)
   }
   const handleClick = () => {
+    if(reversed === 'solved') return
     flip()
     controller.flipCard(position)
   }
