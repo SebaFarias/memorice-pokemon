@@ -4,12 +4,11 @@ import PokeMatrix from'../model/PokeMatrix'
 
 export const GlobalContext = createContext()
 
-const MAX_ROWS = 9
-const MAX_COLUMNS = 9
+const FLIP_TIME = 300 //this is only half the turn
 
 export const GlobalStateProvider = (props) => {
   const [ global, setGlobal] = useState({
-    data: new PokeMatrix( 5 , 6 ).getPokeMatrix(),
+    data: new PokeMatrix( 5 , 6 ),
     rows: 5,
     columns: 6,
     blocked: false,
@@ -18,6 +17,7 @@ export const GlobalStateProvider = (props) => {
     showMenu:true,
     timer: new Timer(),
     errors: 0,
+    clicked: [],
   })
   const controller = {
     showMenu: () => {
@@ -54,22 +54,24 @@ export const GlobalStateProvider = (props) => {
         })
       })
     },
-    restartErrors: () => {
+    disableBoard: () => {
       setGlobal( prevState => {
-        return ({
+        return({
           ...prevState,
-          errors: 0,
+          blocked: true,
         })
       })
     },
-    toggleBlocked: () => {
+    allowBoard: () => {
       setGlobal( prevState => {
-        document.getElementById('board').style.pointerEvents = prevState? 'auto' : 'none'
         return({
           ...prevState,
-          blocked: !prevState.blocked,
+          blocked: false,
         })
       })
+    },
+    delay: ( callback, delay ) => {
+      setTimeout(callback,delay)
     },
     setRows: newValue => {
       setGlobal( prevState => {
@@ -77,18 +79,17 @@ export const GlobalStateProvider = (props) => {
           ...prevState,
           rows: newValue,
           started: false,
-          data: new PokeMatrix( newValue, prevState.columns ).getPokeMatrix(),
+          data: new PokeMatrix( newValue, prevState.columns ),
         })
       })
     },
     setColumns: newValue => {
       setGlobal( prevState => {
-        console.log('what=)')
         return({
           ...prevState,
           columns: newValue,
           started: false,
-          data: new PokeMatrix( prevState.rows, newValue ).getPokeMatrix(),
+          data: new PokeMatrix( prevState.rows, newValue ),
         })
       })
     },
@@ -96,7 +97,7 @@ export const GlobalStateProvider = (props) => {
       setGlobal( prevState => {
         return({
           ...prevState,
-          data: new PokeMatrix( prevState.rows, prevState.columns ).getPokeMatrix(),
+          data: new PokeMatrix( prevState.rows, prevState.columns ),
         })
       })
     },
@@ -105,22 +106,82 @@ export const GlobalStateProvider = (props) => {
         prevState.timer.startNewGame()
         return({
           ...prevState,
-          data: new PokeMatrix( prevState.rows , prevState.columns ).getPokeMatrix(),
+          data: new PokeMatrix( prevState.rows , prevState.columns ),
           errors: 0,
           menu: 0,
           showMenu: false,
           started: true,
-
+          clicked: [],
         })
       })
     },
-    flipCard: indexes => {
-      console.log(indexes)
+    setClicked: newClicked => {
+      setGlobal( prevState => {
+        return({
+          ...prevState,
+          clicked: newClicked,
+        })
+      })
     },
-    getNewState: prevCardState => {
-      if( prevCardState === 'hidden' ) return 'shown'
-      if( prevCardState === 'shown' ) return 'hidden'
-      return prevCardState
+    getGlobal: () =>{
+      let global
+      setGlobal( prevState => {
+        global = prevState
+        return prevState
+      })
+      return global
+    },
+    clickedCard: ( indexes, flip ) => {
+      const prevState = controller.getGlobal()
+      if(indexes===prevState.clicked[0]) return
+      const isSecond = prevState.clicked.length > 0
+      let lastOne
+      if(isSecond) lastOne = prevState.clicked    
+      controller.disableBoard()
+      setTimeout(()=>{
+        controller.allowBoard()
+      }, 2 * FLIP_TIME)
+      controller.flipCard( indexes, flip )
+      controller.setClicked(isSecond? [] : [ indexes, flip ])
+      if(!isSecond) return
+      const success = prevState.data.compare(lastOne[0],indexes)
+      setTimeout(()=>{
+        controller.checkWin()    
+      },3 * FLIP_TIME)
+      if(success) return
+      setTimeout( ()=>{
+        controller.addError()
+        controller.animateError()
+        controller.flipCard( indexes, flip )
+        controller.flipCard( lastOne[0] , lastOne[1])  
+      },3*FLIP_TIME)
+    },
+    animateError: () => {
+      console.log('Haz esta animación Seba flojo!!!')
+    },
+    checkWin: () => {
+      setGlobal( prevState => {
+        const finished = prevState.data.isSolved()
+        if(!finished) return prevState
+        prevState.timer.stop()
+        return({
+          ...prevState,
+          menu:3,
+          showMenu:true,
+          started:false,
+        })
+      })
+    },
+    flipCard: (indexes,flip) => {
+      flip(FLIP_TIME)
+      setTimeout(()=>{
+        setGlobal( prevState => {
+          return({
+            ...prevState,
+            data: prevState.data.flip(indexes),
+          })
+        })
+      },FLIP_TIME)
     },
   }
   

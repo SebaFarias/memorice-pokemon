@@ -1,6 +1,9 @@
 import React, { useContext } from 'react'
 import { GlobalContext } from './GlobalContext'
 
+const MAX_ROWS = 9
+const MAX_COLUMNS = 9
+
 const SizeSelector = () => {
 
   const [ global, controller ] = useContext( GlobalContext )
@@ -29,7 +32,7 @@ const SizeSelector = () => {
           onChange={handleRowChange} 
           style={{width:100,height:20,transform:'rotate(270deg) translate(-50%,-50%)',}} 
           min='1' 
-          max='9' 
+          max={MAX_ROWS} 
           step='1'
         />
         <div className="size-center-container" style={{display:'flex',flexDirection:'column',transform:'translate(-50%,0)'}}>
@@ -43,7 +46,7 @@ const SizeSelector = () => {
             onChange={handleColumnChange} 
             style={{width:100,height:20,}} 
             min='1' 
-            max='9' 
+            max={MAX_COLUMNS} 
             step='1'
           />
           <h4 style={{margin:'auto'}}>{global.columns} Columnas</h4>

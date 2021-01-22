@@ -3,48 +3,49 @@ import imgController from '../../data/controllers/img'
 import {GlobalContext} from './GlobalContext'
 import pokeballImg from '../../public/icon.svg'
 
-const FLIP_TIME = 300
-
 const Card = ({ pokemon, status, position, vertical }) => {
   const [ global, controller ] = useContext(GlobalContext)
   const [ reversed, setReversed ] = useState( status )
   const [ cardStyle, setCardStyle ] = useState({
     cursor: `${reversed === 'solved'? 'not-allowed':'pointer'}`,
     transform: `translate(${needCorrection(global,position)?50:0}%,0%)`,
-    transition: `transform ${FLIP_TIME}ms`
   })
 
   useEffect(()=>{
     const updateCard = () => {
       setReversed( status )
+      setCardStyle( prevState => {
+        return({
+          ...prevState,
+          cursor: `${reversed === 'solved'? 'not-allowed':'pointer'}`,
+          transform: `translate(${needCorrection(global,position)?50:0}%,0%)`,
+        })
+      })
     }
     updateCard()
-  },[pokemon])
-  const flip = () => {
-    controller.toggleBlocked()
+  },[status,global.rows,global.columns])
+
+  const flip = flipTime => {
   setCardStyle( prevState => {
     return({
         ...prevState,
         transform: `translate(${needCorrection(global,position)?50:0}%,0%) rotate3d(0,1,0,90deg)`,
+        transition: `transform ${flipTime}ms`,
       })
     })
     setTimeout(()=>{
-      setReversed( prevState => {
-        return(controller.getNewState(prevState))
-      })
-        controller.toggleBlocked()
-        setCardStyle( prevState => {
-          return({
-            ...prevState,
-            transform: `translate(${needCorrection(global,position)?50:0}%,0%)`,
+      setCardStyle( prevState => {
+        return({
+          ...prevState,
+          transform: `translate(${needCorrection(global,position)?50:0}%,0%)`,
+          transition: `transform ${flipTime}ms`,
           })
         })
-    },FLIP_TIME)
+    },flipTime)
   }
+
   const handleClick = () => {
-    if(reversed === 'solved') return
-    flip()
-    controller.flipCard(position)
+    if( reversed === 'hidden' ) controller.clickedCard( position, flip )
   }
   
   return (
@@ -69,5 +70,5 @@ const Card = ({ pokemon, status, position, vertical }) => {
 export default Card
 
 const needCorrection = ({rows,columns},position) => {
-  return (rows*columns)%2 != 0 && rows == position[0]
+  return (rows*columns)%2 != 0 && rows == position[0]+1
 }

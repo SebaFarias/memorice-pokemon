@@ -3,6 +3,8 @@ import { GlobalContext } from '../GlobalContext'
 import StartMenu from './StartMenu'
 import MainMenu from './MainMenu'
 import HighscoresMenu from './HighscoresMenu'
+import SubmitScoreMenu from './SubmitScoreMenu'
+
 
 
 const MenuModal = () => {
@@ -40,6 +42,7 @@ const MenuModal = () => {
         {menu === 0 ? <MainMenu/> :''}
         {menu === 1 ? <StartMenu/> :''}
         {menu === 2 ? <HighscoresMenu/> :''}
+        {menu === 3 ? <SubmitScoreMenu/> :''}
       </div>
     </div>
   )

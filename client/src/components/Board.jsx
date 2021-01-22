@@ -32,9 +32,18 @@ const Board = () => {
     return () => window.removeEventListener( 'resize', handleResize)
   } , [global.data]  )
 
+  useEffect( () => {
+    setBoardStyle( prevState => {
+      return({
+        ...prevState,
+        pointerEvents: `${global.blocked?'none':'auto'}`
+      })
+    })
+  },[global.blocked])
+
   return (
     <main id='board' className='board' style = {boardStyle}>
-      {global.data.map( ( row, i ) => {
+      {global.data.getPokeMatrix().map( ( row, i ) => {
         return row.map( ( pokemon, j ) => {
           return (
           <Card 
