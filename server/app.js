@@ -31,7 +31,7 @@ app.use(errorHandler)
 
 //Serve static
 if(env.process.NODE_ENV === 'production'){
-  app.use(express.static('../client/build'))
+  app.use(express.static('../client/dist'))
 }
 
 module.exports = app
