@@ -30,7 +30,7 @@ const Board = () => {
     handleResize()
     recalculateCardSize()
     return () => window.removeEventListener( 'resize', handleResize)
-  } , [global.rows,global.columns]  )
+  } , [global.rows,global.columns,global.data]  )
 
   return (
     <main id='board' className='board' style = {boardStyle}>

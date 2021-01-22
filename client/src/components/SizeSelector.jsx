@@ -7,6 +7,8 @@ const SizeSelector = () => {
 
   const handleSubmit = e => {
     e.preventDefault()
+    if(global.rows == 1 && global.columns == 1) return
+    controller.startGame()
   } 
   const handleRowChange = e => {
     controller.setRows(e.target.value)

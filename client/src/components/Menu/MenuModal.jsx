@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState, useRef } from 'react'
 import { GlobalContext } from '../GlobalContext'
 import StartMenu from './StartMenu'
+import MainMenu from './MainMenu'
+import HighscoresMenu from './HighscoresMenu'
 
 
 const MenuModal = () => {
@@ -16,7 +18,7 @@ const MenuModal = () => {
     }
     const handleClick = event => {
       if( global.showMenu && global.started && ref.current && !ref.current.contains(event.target)){
-        controller.toggleMenu()
+        controller.hideMenu()
       }
     }
     const checkMenu = () => {
@@ -30,12 +32,14 @@ const MenuModal = () => {
       window.removeEventListener( 'scroll', handleScroll )
       document.removeEventListener( 'click', handleClick)
     }
-  },[global.showMenu])
+  },[global.showMenu,global.menu,global.started])
 
   return(
     <div className={`modal-outside ${global.showMenu?'':'hidden'}`} style={{top: scroll,}}>
       <div className="menu-container" ref={ref}>
+        {menu === 0 ? <MainMenu/> :''}
         {menu === 1 ? <StartMenu/> :''}
+        {menu === 2 ? <HighscoresMenu/> :''}
       </div>
     </div>
   )

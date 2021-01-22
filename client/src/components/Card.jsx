@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import imgController from '../../data/controllers/img'
 import {GlobalContext} from './GlobalContext'
 import pokeballImg from '../../public/icon.svg'
@@ -13,6 +13,8 @@ const Card = ({ pokemon, status, position, vertical }) => {
     transform: `translate(${needCorrection(global,position)?50:0}%,0%)`,
     transition: `transform ${FLIP_TIME}ms`
   })
+
+
   const flip = () => {
     controller.toggleBlocked()
   setCardStyle( prevState => {

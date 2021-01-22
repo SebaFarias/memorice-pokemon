@@ -20,11 +20,29 @@ export const GlobalStateProvider = (props) => {
     errors: 0,
   })
   const controller = {
-    toggleMenu: () => {
+    showMenu: () => {
+      setGlobal( prevState => {
+        prevState.timer.stop()
+        return ({
+          ...prevState,
+          showMenu: true,
+        })
+      })
+    },
+    hideMenu: () => {
+      setGlobal( prevState => {
+        prevState.timer.start()
+        return ({
+          ...prevState,
+          showMenu: false,
+        })
+      })
+    },
+    setMenu: menu => {
       setGlobal( prevState => {
         return ({
           ...prevState,
-          showMenu: !prevState.showMenu,
+          menu: menu,
         })
       })
     },
@@ -58,60 +76,19 @@ export const GlobalStateProvider = (props) => {
         return({
           ...prevState,
           rows: newValue,
+          started: false,
           data: new PokeMatrix( newValue, prevState.columns ).getPokeMatrix(),
-      })
-      })
-    },
-    addRow: () => {
-      setGlobal(prevState => {
-        const current = prevState.rows 
-        if(current >= MAX_ROWS) return prevState
-        return({
-          ...prevState,
-          rows: current + 1,
-          data: new PokeMatrix( current+1, prevState.columns ).getPokeMatrix(),
-        })
-      })
-    },
-    substractRow: () => {
-      setGlobal(prevState => {
-        const current = prevState.rows 
-        if(current <= 1) return prevState
-        return({
-          ...prevState,
-          rows: current - 1,
-          data: new PokeMatrix( current-1, prevState.columns ).getPokeMatrix(),
         })
       })
     },
     setColumns: newValue => {
       setGlobal( prevState => {
+        console.log('what=)')
         return({
           ...prevState,
           columns: newValue,
+          started: false,
           data: new PokeMatrix( prevState.rows, newValue ).getPokeMatrix(),
-      })
-      })
-    },
-    addColumn: () => {
-      setGlobal(prevState => {
-        const current = prevState.columns
-        if(current >= MAX_COLUMNS) return prevState
-        return({
-          ...prevState,
-          columns: current + 1,
-          data: new PokeMatrix( prevState.rows, current + 1 ).getPokeMatrix(),
-        })
-      })
-    },
-    substractColumn: () => {
-      setGlobal(prevState => {
-        const current = prevState.columns 
-        if(current <= 1) return prevState
-        return({
-          ...prevState,
-          columns: current - 1,
-          data: new PokeMatrix( prevState.rows, current - 1 ).getPokeMatrix(),
         })
       })
     },
@@ -120,6 +97,20 @@ export const GlobalStateProvider = (props) => {
         return({
           ...prevState,
           data: new PokeMatrix( prevState.rows, prevState.columns ).getPokeMatrix(),
+        })
+      })
+    },
+    startGame: () => {
+      setGlobal( prevState => {
+        prevState.timer.startNewGame()
+        return({
+          ...prevState,
+          data: new PokeMatrix( prevState.rows , prevState.columns ).getPokeMatrix(),
+          errors: 0,
+          menu: 0,
+          showMenu: false,
+          started: true,
+
         })
       })
     },
