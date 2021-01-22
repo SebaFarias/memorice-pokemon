@@ -146,6 +146,27 @@ h4{
   color: #a88d04;
   border: 2px solid #a88d04;
 }
+.score{
+  display: flex;
+  justify-content: center;
+}
+.score-stats{
+  border: 2px solid;
+  margin: auto;
+  padding: 1rem;
+  border-radius: var(--bar-radius);
+}
+.input{
+  padding: 0.4rem 1rem;
+  box-sizing: border-box;
+  margin-left: 1rem;
+  max-width: 250px;
+}
+.submit-form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .bar{
   padding: 1rem;
   flex-grow: 1;

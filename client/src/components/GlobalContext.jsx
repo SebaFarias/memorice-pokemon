@@ -13,19 +13,20 @@ export const GlobalStateProvider = (props) => {
     columns: 6,
     blocked: false,
     started: false,
-    menu:1,
+    menu:-1,
     showMenu:true,
     timer: new Timer(),
     errors: 0,
     clicked: [],
   })
   const controller = {
-    showMenu: () => {
+    showMenu: selectedMenu => {
       setGlobal( prevState => {
         prevState.timer.stop()
         return ({
           ...prevState,
           showMenu: true,
+          menu: typeof selectedMenu === 'undefined'? prevState.menu : selectedMenu,
         })
       })
     },
@@ -169,6 +170,20 @@ export const GlobalStateProvider = (props) => {
           menu:3,
           showMenu:true,
           started:false,
+        })
+      })
+    },
+    handleSubmit: name => {
+      setGlobal( prevState => {
+        const scoreData = {
+          user: name,
+          size: Math.floor( ( prevState.rows * prevState.columns ) / 2 ),
+          time: prevState.timer.toMiliseconds(),
+          fails: prevState.errors 
+        }
+        console.log(scoreData)
+        return({
+          ...prevState
         })
       })
     },

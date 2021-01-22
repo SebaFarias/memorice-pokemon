@@ -39,8 +39,9 @@ const MenuModal = () => {
   return(
     <div className={`modal-outside ${global.showMenu?'':'hidden'}`} style={{top: scroll,}}>
       <div className="menu-container" ref={ref}>
+        {menu === -1 ? <StartMenu starting={true}/> :''}
         {menu === 0 ? <MainMenu/> :''}
-        {menu === 1 ? <StartMenu/> :''}
+        {menu === 1 ? <StartMenu starting={false}/> :''}
         {menu === 2 ? <HighscoresMenu/> :''}
         {menu === 3 ? <SubmitScoreMenu/> :''}
       </div>

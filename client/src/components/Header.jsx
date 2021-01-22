@@ -8,7 +8,7 @@ const Header = () => {
   const [ global, controller ] = useContext( GlobalContext )
 
   const handleMenuBtn = () => {
-    controller.showMenu()
+    controller.showMenu(0)
   }
   return(
     <nav className='top bar'>
