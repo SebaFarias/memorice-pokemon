@@ -29,4 +29,7 @@ app.get( '/', ( request, response ) => {
 app.use(notFound)
 app.use(errorHandler)
 
+//Serve static
+app.use(express.static('../client/build'))
+
 module.exports = app

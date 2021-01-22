@@ -12,6 +12,7 @@ const SizeSelector = () => {
     e.preventDefault()
     if(global.rows == 1 && global.columns == 1) return
     controller.startGame()
+    //controller.fetchLeaderBoard()
   } 
   const handleRowChange = e => {
     controller.setRows(e.target.value)

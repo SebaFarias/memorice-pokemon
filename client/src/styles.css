@@ -1,9 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
 
 :root{
+  --round-btn-BG: no-repeat center, radial-gradient(50% 50% at 50% 50%,#34384b 0%,#1F212D 100% );
   --gradient:linear-gradient(116.82deg, #2571F8 0%, #68E2F8 100%);
   --bar-radius: 1.5rem;
-  --round-btn-BG: no-repeat center, radial-gradient(50% 50% at 50% 50%,#34384b 0%,#1F212D 100% );
   --yellow: #F4CB08;
   --blue: #1D379C;
 }
@@ -172,7 +172,7 @@ h4{
   flex-grow: 1;
   align-self: stretch;
   font-size: 14px;
-  font-weight: bold; 
+  font-weight: bold;
   text-align: center;
   color: white;
   background: linear-gradient(0deg,#1F212D 0%,#2a2d3c 50%,#1F212D 100%);

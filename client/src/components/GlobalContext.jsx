@@ -1,6 +1,7 @@
 import React, {useState , createContext} from 'react'
 import Timer from '../model/Timer'
 import PokeMatrix from'../model/PokeMatrix'
+//import courier from '../../data/leaderboardApi'
 
 export const GlobalContext = createContext()
 
@@ -18,6 +19,7 @@ export const GlobalStateProvider = (props) => {
     timer: new Timer(),
     errors: 0,
     clicked: [],
+    leaderBoard: [],
   })
   const controller = {
     showMenu: selectedMenu => {
@@ -187,6 +189,13 @@ export const GlobalStateProvider = (props) => {
         })
       })
     },
+    // fetchLeaderBoard: async () => {
+    //   const leaderBoard = await courier.fetchLeaderBoard()
+    //   .then( res => {
+    //     console.log(res)
+    //   }
+    //   )
+    // },
     flipCard: (indexes,flip) => {
       flip(FLIP_TIME)
       setTimeout(()=>{
