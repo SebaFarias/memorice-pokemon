@@ -30,6 +30,8 @@ app.use(notFound)
 app.use(errorHandler)
 
 //Serve static
-app.use(express.static('../client/build'))
+if(env.process.NODE_ENV === 'production'){
+  app.use(express.static('../client/build'))
+}
 
 module.exports = app
