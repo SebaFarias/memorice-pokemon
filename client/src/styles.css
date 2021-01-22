@@ -4,6 +4,8 @@
   --gradient:linear-gradient(116.82deg, #2571F8 0%, #68E2F8 100%);
   --bar-radius: 1.5rem;
   --round-btn-BG: no-repeat center, radial-gradient(50% 50% at 50% 50%,#34384b 0%,#1F212D 100% );
+  --yellow: #F4CB08;
+  --blue: #1D379C;
 }
 
 body{
@@ -46,11 +48,15 @@ body{
   height: 90%;
   display: flex;
   border-radius: 10px;
-  border: 5px solid #1D379C;
+  border: 5px solid var(--blue);
   overflow: hidden;
 }
 .pokemon-img{
   margin: auto;
+}
+.hidden{
+  opacity: 0;
+  pointer-events: none;
 }
 .modal-outside{
   position: absolute;
@@ -62,19 +68,76 @@ body{
   z-index: 1;
   display: flex;
 }
-.hidden > .menu{
+.hidden > .menu-container{
   transform: translate(0,-50%);
 }
-.menu{
-  width: 50vw;
-  height: 50vh;
-  background: #1D379C;
+.menu-container{
+  min-width: 50vw;
+  min-height: 50vh;
+  background: url('../public/oak.png') bottom left no-repeat , radial-gradient(50% 50% at 50% 50%, #3d3d3d 0%, #21252D 100%);
+  border-radius: var(--bar-radius);
+  border: 5px solid var(--yellow);
   margin: auto;
-  transition: all 200ms;
+  transition: all 200ms ease-in;
+  display: flex;
 }
-.hidden{
-  opacity: 0;
-  pointer-events: none;
+.menu{
+  color: var(--yellow);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  padding: 1rem;
+}
+h3{
+  font-size: 2rem;
+  text-align: center;
+}
+h4{
+  text-align: center;
+}
+.oak-spacer{
+  width: 70px;
+  height: 100px;
+}
+.menu-up{
+  display: flex;
+  height: 100%;
+  margin: auto;
+}
+.menu-down{
+  height: 100px;
+  display: flex;
+}
+.btn-container{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn-yel{
+  background: none;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: var(--yellow);
+  padding: 1rem var(--bar-radius);
+  border-radius: var(--bar-radius);
+  border: 2px solid var(--yellow);
+  transition: all 200ms ease-out;
+}
+.btn-yel:hover,
+.btn-yel:active{
+  background: var(--yellow);
+  border: 4px solid var(--blue);
+  color: var(--blue);
+}
+.btn-yel:active{
+  transform: translateY(2px);
+}
+.btn-yel:focus{
+  outline: 0;
+  box-shadow: 0 0 5px 7px rgba(255,255,255,0.1);
 }
 .bar{
   padding: 1rem;
@@ -92,6 +155,7 @@ body{
   border-radius: 50%;
   border: none;
   margin-left: 0.5rem;
+  transition: all 200ms ease-out;
 }
 .round-btn:focus,
 .round-btn:hover{
