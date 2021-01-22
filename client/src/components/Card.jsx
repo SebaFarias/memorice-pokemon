@@ -14,7 +14,12 @@ const Card = ({ pokemon, status, position, vertical }) => {
     transition: `transform ${FLIP_TIME}ms`
   })
 
-
+  useEffect(()=>{
+    const updateCard = () => {
+      setReversed( status )
+    }
+    updateCard()
+  },[pokemon])
   const flip = () => {
     controller.toggleBlocked()
   setCardStyle( prevState => {
