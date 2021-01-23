@@ -4,7 +4,7 @@ import StartMenu from './StartMenu'
 import MainMenu from './MainMenu'
 import HighscoresMenu from './HighscoresMenu'
 import SubmitScoreMenu from './SubmitScoreMenu'
-
+import oak from '../../../public/oak.png'
 
 
 const MenuModal = () => {
@@ -38,7 +38,9 @@ const MenuModal = () => {
 
   return(
     <div className={`modal-outside ${global.showMenu?'':'hidden'}`} style={{top: scroll,}}>
-      <div className="menu-container" ref={ref}>
+      <div className="menu-container" ref={ref} style={{
+        background: ` url(${oak}) bottom left no-repeat , radial-gradient(50% 50% at 50% 50%, #3d3d3d 0%, #21252D 100%)`
+      }}>
         {menu === -1 ? <StartMenu starting={true}/> :''}
         {menu === 0 ? <MainMenu/> :''}
         {menu === 1 ? <StartMenu starting={false}/> :''}

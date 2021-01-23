@@ -1,7 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
 
 :root{
-  --round-btn-BG: no-repeat center, radial-gradient(50% 50% at 50% 50%,#34384b 0%,#1F212D 100% );
   --gradient:linear-gradient(116.82deg, #2571F8 0%, #68E2F8 100%);
   --bar-radius: 1.5rem;
   --yellow: #F4CB08;
@@ -74,7 +73,6 @@ body{
 .menu-container{
   min-width: 50vw;
   min-height: 50vh;
-  background: url('../public/oak.png') bottom left no-repeat , radial-gradient(50% 50% at 50% 50%, #3d3d3d 0%, #21252D 100%);
   border-radius: var(--bar-radius);
   border: 5px solid var(--yellow);
   margin: auto;
@@ -102,6 +100,7 @@ h4{
 .oak-spacer{
   width: 70px;
   height: 100px;
+  position: relative;
 }
 .menu-up{
   display: flex;
@@ -192,12 +191,6 @@ h4{
 }
 .round-btn:active{
   transform: translate(0,2px);
-}
-.menu-btn{
-  background: url('../public/menu.svg') var(--round-btn-BG);
-}
-.highscores-btn{
-  background: url('../public/highscores.svg') var(--round-btn-BG);
 }
 .top{
   font-size: 18px;
