@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start":"node server/index.js",
+    "start": "node server/index.js",
     "dev": "nodemon server/index.js",
-    "heroku-postbuild":"npm run install-client && npm run build",
+    "heroku-postbuild": "npm run install-client && npm run build",
     "install-client": "cd client && npm install --dev",
     "build": "cd client && npm run build",
     "start-client": "cd client && npm start"
@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/SebaFarias/memorice-pokemon#readme",
   "devDependencies": {
+    "html-webpack-plugin": "^5.0.0-alpha.2",
     "nodemon": "^2.0.7"
   },
   "dependencies": {
