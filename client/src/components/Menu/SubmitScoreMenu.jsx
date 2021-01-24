@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { GlobalContext } from '../GlobalContext'
+import BackButton from './BackButton'
 
 const SubmitScoreMenu = () => {
 
@@ -14,7 +15,7 @@ const handleSubmit = event => {
 
   return(
     <div className="submit menu">
-      <h3>Felicitaciones</h3>
+      <BackButton title='Felicitaciones'/>
       <div className="score">
         <div className="score-stats">
           <h4>Tiempo: {global.timer.toString()}</h4>

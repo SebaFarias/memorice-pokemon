@@ -5,6 +5,7 @@ const cors = require('cors')
 const notFound = require('./middlewares/notFound')
 const errorHandler = require('./middlewares/errorHandler')
 const highscoreRoutes = require('./routes/highscore.routes')
+require('dotenv').config()
 
 const app = express()
 
@@ -30,7 +31,7 @@ app.use(notFound)
 app.use(errorHandler)
 
 //Serve static
-if(env.process.NODE_ENV === 'production'){
+if(process.NODE_ENV === 'production'){
   app.use(express.static('../client/dist'))
 }
 
