@@ -8,7 +8,7 @@ module.exports = {
   output: {
     filename: "bundle.[fullhash].js",
     path: path.resolve(__dirname,'dist'),
-    publiPath: ASSET_PATH,
+    publicPath: ASSET_PATH,
   },
   mode:'production',
   devtool: 'eval-cheap-source-map',
