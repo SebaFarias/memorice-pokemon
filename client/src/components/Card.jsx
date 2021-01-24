@@ -12,18 +12,22 @@ const Card = ({ pokemon, status, position, vertical }) => {
   })
 
   useEffect(()=>{
+    setReversed( status )
+  },[status])
+
+  useEffect(()=>{
     const updateCard = () => {
-      setReversed( status )
       setCardStyle( prevState => {
+        console.log('status:',status,'reversed',reversed)
         return({
           ...prevState,
           cursor: `${reversed === 'solved'? 'not-allowed':'pointer'}`,
           transform: `translate(${needCorrection(global,position)?50:0}%,0%)`,
         })
-      })
+      })  
     }
     updateCard()
-  },[status,global.rows,global.columns])
+  },[reversed])
 
   const flip = flipTime => {
   setCardStyle( prevState => {

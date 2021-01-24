@@ -17,14 +17,16 @@ const BackButton = ({title}) => {
       onClick={handleMenuBtn}
       className="btn-yel" 
       style={{
-        width: '2rem',
-        height: '2rem',
-        position: 'absolute',
         top: 0,
         left: 0,
         padding:0,
+        width: '2rem',
+        height: '2rem',
+        position: 'absolute',
         textAlign: 'center',
-        lineHeight: size,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
         }}
       >
         &#60;

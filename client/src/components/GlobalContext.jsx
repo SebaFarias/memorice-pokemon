@@ -143,7 +143,7 @@ export const GlobalStateProvider = (props) => {
       controller.disableBoard()
       setTimeout(()=>{
         controller.allowBoard()
-      }, 2 * FLIP_TIME)
+      },FLIP_TIME)
       controller.flipCard( indexes, flip )
       controller.setClicked(isSecond? [] : [ indexes, flip ])
       if(!isSecond) return
@@ -189,13 +189,13 @@ export const GlobalStateProvider = (props) => {
         })
       })
     },
-    // fetchLeaderBoard: async () => {
-    //   const leaderBoard = await courier.fetchLeaderBoard()
-    //   .then( res => {
-    //     console.log(res)
-    //   }
-    //   )
-    // },
+    fetchLeaderBoard: async () => {
+      const leaderBoard = await courier.fetchLeaderBoard()
+      .then( res => {
+        console.log(res)
+      }
+      )
+    },
     flipCard: (indexes,flip) => {
       flip(FLIP_TIME)
       setTimeout(()=>{

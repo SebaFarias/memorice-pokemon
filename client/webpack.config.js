@@ -1,12 +1,14 @@
 const path = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ASSET_PATH = process.env.ASSET_PATH || '/';
 
 module.exports = {
   entry: './src/index.js',
   output: {
     filename: "bundle.[fullhash].js",
     path: path.resolve(__dirname,'dist'),
+    publiPath: ASSET_PATH,
   },
   mode:'production',
   devtool: 'eval-cheap-source-map',
