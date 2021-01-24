@@ -4,7 +4,7 @@ import StartMenu from './StartMenu'
 import MainMenu from './MainMenu'
 import HighscoresMenu from './HighscoresMenu'
 import SubmitScoreMenu from './SubmitScoreMenu'
-import oak from `../../../public/oak.png`
+import oak from '../../images/oak.png'
 
 
 const MenuModal = () => {
