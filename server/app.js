@@ -20,19 +20,19 @@ app.use(express.json())
 
 //routes
 app.use('/highscores' , highscoreRoutes)
-app.get( '/', ( request, response ) => {
-  response.json({
-    message: "Binvenido al memorice Pokemon"
-  })
-}) 
-
-//notFound
-app.use(notFound)
-app.use(errorHandler)
+// app.get( '/', ( request, response ) => {
+//   response.json({
+//     message: "Binvenido al memorice Pokemon"
+//   })
+// }) 
 
 //Serve static
 if(process.NODE_ENV === 'production'){
   app.use(express.static('../client/dist'))
 }
+
+//notFound
+app.use(notFound)
+app.use(errorHandler)
 
 module.exports = app
